@@ -82,11 +82,14 @@ export function CodeBlockComponent({ editor, getPos, node }: Props) {
           <button
             type="button"
             className={cn(
-              "group/button absolute top-2 right-2 z-10 hidden size-8 items-center justify-center rounded-md border border-subtle bg-layer-1 backdrop-blur-sm transition duration-150 ease-in-out group-hover/code:flex",
+              // Hover-only on a mouse; always visible on touch screens, which
+              // have no hover and otherwise never saw the button.
+              "group/button absolute top-2 right-2 z-10 hidden size-8 items-center justify-center rounded-md border border-subtle bg-layer-1 backdrop-blur-sm transition duration-150 ease-in-out group-hover/code:flex pointer-coarse:flex",
               {
                 "bg-success-subtle hover:bg-success-subtle-1 active:bg-success-subtle-1": copied,
               }
             )}
+            aria-label={copied ? "Copied" : "Copy code"}
             onClick={(e) => void copyToClipboard(e)}
           >
             {copied ? (
